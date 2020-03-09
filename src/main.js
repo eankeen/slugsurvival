@@ -5,7 +5,7 @@ var VueRouter = require('vue-router').default
 var sync = require('vuex-router-sync').sync
 var VTooltip = require('v-tooltip')
 
-console.dir(sync)
+Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(VTooltip)
 
