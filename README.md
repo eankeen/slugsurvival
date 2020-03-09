@@ -74,6 +74,7 @@ THIS IS STILL A VERY NEW PROJECT. Bugs are expected.
 
 Clone the repo, then,
 ```
+npx gulp default
 npm install && npm install pm2 -g
 ```
 
