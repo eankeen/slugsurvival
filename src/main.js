@@ -1,10 +1,11 @@
 "use strict"
-var Vue = require('vue')
+var Vue = require('vue').default
 
-var VueRouter = require('vue-router')
+var VueRouter = require('vue-router').default
 var sync = require('vuex-router-sync').sync
 var VTooltip = require('v-tooltip')
 
+console.dir(sync)
 Vue.use(VueRouter)
 Vue.use(VTooltip)
 
