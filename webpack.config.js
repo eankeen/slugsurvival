@@ -7,7 +7,6 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -33,7 +32,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    isDev ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+                    'vue-style-loader',
                     'css-loader'
                 ]
             }
@@ -51,14 +50,8 @@ module.exports = {
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             title: "SlugSurvival",
-            template: "./src/index.html"
+            template: "./src/static/index.html"
         }),
-        // new HtmlWebpackTagsPlugin({
-        //     append: true, links: 'style.min.css'
-        // }),
-        // new HtmlWebpackTagsPlugin({
-        //     append: false, scripts: 'assets.min.js'
-        // })
     ],
     devServer: {
         open: false,
@@ -66,10 +59,6 @@ module.exports = {
         port: 8080,
         compress: true,
         historyApiFallback: true,
-        publicPath: '/',
-        contentBase: [
-            path.join(__dirname, 'public')
-        ],
         proxy: {
             changeOrigin: true,
             '/graphql': {
