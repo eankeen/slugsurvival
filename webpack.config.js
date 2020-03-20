@@ -49,7 +49,6 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new CaseSensitivePathsPlugin(),
         new VueLoaderPlugin(),
-        new MiniCssExtractPlugin(),
         new HtmlWebpackPlugin({
             title: "SlugSurvival",
             template: "./src/index.html"
