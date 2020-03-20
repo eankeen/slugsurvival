@@ -2,9 +2,8 @@
 
 const path = require('path')
 
-const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 
@@ -18,8 +17,8 @@ module.exports = {
     },
     context: path.resolve(__dirname),
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'public'),
+        filename: 'prod.js',
         publicPath: '/'
     },
     module: {
@@ -32,7 +31,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    'vue-style-loader',
+                    isDev ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
                     'css-loader'
                 ]
             }
@@ -45,28 +44,22 @@ module.exports = {
         }
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+        // new webpack.HotModuleReplacementPlugin(),
         new CaseSensitivePathsPlugin(),
         new VueLoaderPlugin(),
-        new HtmlWebpackPlugin({
-            title: "SlugSurvival",
-            template: "./src/static/index.html"
-        }),
+        ...(isDev ? [] : [new MiniCssExtractPlugin()])
     ],
     devServer: {
         open: false,
         hot: true,
         port: 8080,
         compress: true,
-        historyApiFallback: true,
-        proxy: {
-            changeOrigin: true,
-            '/graphql': {
-                target: 'http://localhost:3000'
-            },
-            '/api': {
-                target: 'http://localhost:3000'
-            }
-        }
+        historyApiFallback: false,
+        // proxy: {
+        //     '/': {
+        //         changeOrigin: true,
+        //         target: 'http://localhost:3000'
+        //     }
+        // }
     }
 }

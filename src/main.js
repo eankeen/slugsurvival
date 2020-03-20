@@ -5,13 +5,12 @@ var VueRouter = require('vue-router').default
 var sync = require('vuex-router-sync').sync
 var VTooltip = require('v-tooltip')
 
-console.dir(sync)
 Vue.use(VueRouter)
 Vue.use(VTooltip)
 
 var store = require('./lib/vuex/store.js');
 
-var App = Vue.extend(require('./app.vue'));
+var App = Vue.extend(require('./app.vue').default);
 
 var router = new VueRouter({
     mode: 'history',
@@ -158,4 +157,6 @@ require('./lib/init.js')(store, router).then(function() {
         store: store
     }).$mount('#app')
     window.App = vm;
+}).catch(function(err) {
+    console.error(err)
 })
