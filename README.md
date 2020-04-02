@@ -84,6 +84,11 @@ pm2 start app.json --env dev
 
 Then,
 ```
+npx gulp
+```
+
+Then,
+```
 npm run dev
 ```
 
